@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-arena-950 text-white font-sans antialiased;
+    background-image: radial-gradient(ellipse at top, rgba(98, 70, 234, 0.15) 0%, transparent 60%);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* ---- Glass Cards ---- */
+  .card-glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+
+  /* ---- Buttons ---- */
+  .btn-primary {
+    @apply bg-arena-500 hover:bg-arena-400 text-white font-semibold px-6 py-3 rounded-xl
+           transition-all duration-200 ease-in-out
+           hover:shadow-glow hover:-translate-y-0.5
+           active:translate-y-0 active:shadow-none
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply bg-white/10 hover:bg-white/20 text-white font-medium px-6 py-3 rounded-xl
+           border border-white/20 hover:border-white/40
+           transition-all duration-200 ease-in-out
+           hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-gold {
+    @apply bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300
+           text-arena-950 font-bold px-6 py-3 rounded-xl
+           transition-all duration-200 ease-in-out
+           hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  /* ---- Inputs ---- */
+  .input-field {
+    @apply w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3
+           text-white placeholder-white/30
+           focus:outline-none focus:border-arena-400 focus:ring-2 focus:ring-arena-500/30
+           transition-all duration-200;
+  }
+
+  /* Hide number input arrows */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  /* ---- Arena Badge (ArenaCoins) ---- */
+  .coin-badge {
+    @apply inline-flex items-center gap-1.5 bg-gold-500/20 text-gold-400
+           border border-gold-500/30 rounded-full px-3 py-1 text-sm font-semibold;
+  }
+
+  /* ---- Status Badges ---- */
+  .badge-open {
+    @apply inline-flex items-center gap-1 bg-green-500/20 text-green-400
+           border border-green-500/30 rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+
+  .badge-closed {
+    @apply inline-flex items-center gap-1 bg-red-500/20 text-red-400
+           border border-red-500/30 rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+
+  /* ---- Nav Link ---- */
+  .nav-link {
+    @apply text-white/60 hover:text-white transition-colors duration-150 text-sm font-medium;
+  }
+
+  .nav-link-active {
+    @apply text-arena-300 font-semibold;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-arena-300 via-arena-200 to-white bg-clip-text text-transparent;
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-gold-400 to-gold-500 bg-clip-text text-transparent;
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 30px rgba(98, 70, 234, 0.4);
+  }
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+::-webkit-scrollbar-thumb { background: rgba(98,70,234,0.4); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(98,70,234,0.7); }
