@@ -210,9 +210,19 @@ function StatCard({ icon: Icon, label, value, color = 'arena' }: {
 // EventCard Component
 // ============================================================
 function EventCard({ event, onPredict }: { event: Event; onPredict: (e: Event) => void }) {
-  const timeLeft = new Date(event.closesAt).getTime() - Date.now();
-  const hoursLeft = Math.max(0, Math.floor(timeLeft / 3600000));
-  const daysLeft = Math.floor(hoursLeft / 24);
+  const timeLeft = Math.max(0, new Date(event.closesAt).getTime() - Date.now());
+  const daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+
+  let timeString = '';
+  if (daysLeft > 0) {
+    timeString = `${daysLeft}d ${hoursLeft}h restantes`;
+  } else if (hoursLeft > 0) {
+    timeString = `${hoursLeft}h ${minutesLeft}m restantes`;
+  } else {
+    timeString = `${minutesLeft}m restantes`;
+  }
 
   const categoryColors: Record<string, string> = {
     'Fútbol': 'text-green-400 bg-green-500/10 border-green-500/30',
@@ -230,7 +240,7 @@ function EventCard({ event, onPredict }: { event: Event; onPredict: (e: Event) =
         </span>
         <span className="text-white/40 text-xs flex items-center gap-1 shrink-0">
           <Clock className="w-3 h-3" />
-          {daysLeft > 0 ? `${daysLeft}d restantes` : `${hoursLeft}h restantes`}
+          {timeString}
         </span>
       </div>
 
