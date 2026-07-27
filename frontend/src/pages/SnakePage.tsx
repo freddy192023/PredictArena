@@ -125,38 +125,37 @@ export default function SnakePage() {
     if (status !== 'PLAYING') return;
 
     const gameInterval = setInterval(() => {
-      setSnake(prevSnake => {
-        const head = prevSnake[0];
-        const newHead = {
-          x: head.x + directionRef.current.x,
-          y: head.y + directionRef.current.y
-        };
+      const currentSnake = snakeRef.current;
+      const head = currentSnake[0];
+      const newHead = {
+        x: head.x + directionRef.current.x,
+        y: head.y + directionRef.current.y
+      };
 
-        // Colisión paredes
-        if (newHead.x < 0 || newHead.x >= GRID_SIZE || newHead.y < 0 || newHead.y >= GRID_SIZE) {
-          endGame();
-          return prevSnake;
-        }
+      // Colisión paredes
+      if (newHead.x < 0 || newHead.x >= GRID_SIZE || newHead.y < 0 || newHead.y >= GRID_SIZE) {
+        endGame();
+        return;
+      }
 
-        // Colisión cuerpo
-        if (prevSnake.some(segment => segment.x === newHead.x && segment.y === newHead.y)) {
-          endGame();
-          return prevSnake;
-        }
+      // Colisión cuerpo
+      if (currentSnake.some(segment => segment.x === newHead.x && segment.y === newHead.y)) {
+        endGame();
+        return;
+      }
 
-        const newSnake = [newHead, ...prevSnake];
+      const newSnake = [newHead, ...currentSnake];
 
-        // Comer manzana
-        if (newHead.x === foodRef.current.x && newHead.y === foodRef.current.y) {
-          setScore(s => s + 1);
-          setCoinsEarned(c => c + COINS_PER_APPLE);
-          setFood(generateFood(newSnake));
-        } else {
-          newSnake.pop(); // Remover cola si no comió
-        }
+      // Comer manzana
+      if (newHead.x === foodRef.current.x && newHead.y === foodRef.current.y) {
+        setScore(s => s + 1);
+        setCoinsEarned(c => c + COINS_PER_APPLE);
+        setFood(generateFood(newSnake));
+      } else {
+        newSnake.pop(); // Remover cola si no comió
+      }
 
-        return newSnake;
-      });
+      setSnake(newSnake);
     }, GAME_SPEED);
 
     return () => clearInterval(gameInterval);
