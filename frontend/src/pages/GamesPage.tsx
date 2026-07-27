@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Gamepad2, LayoutDashboard, Trophy, User as UserIcon, LogOut, Flame, Rocket, Dices, Club } from 'lucide-react';
+import { Gamepad2, LayoutDashboard, Trophy, User as UserIcon, LogOut, Flame, Rocket, Dices, Club, Keyboard } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 
 const GAMES = [
@@ -42,6 +42,19 @@ const GAMES = [
     route: '/hilo',
     available: true,
   },
+  {
+    id: 'snake',
+    title: 'Arena Snake 🐍',
+    description: 'Paga tu entrada y cómete todas las manzanas posibles. Recupera tu entrada al comer 10 manzanas y gana recompensas sin límite.',
+    icon: Keyboard,
+    gradient: 'from-green-500 to-emerald-600',
+    shadow: 'shadow-green-500/30',
+    badge: 'NUEVO',
+    badgeColor: 'bg-green-500/20 text-green-400 border-green-500/20',
+    tag: 'Habilidad',
+    route: '/games/snake',
+    available: true,
+  }
 ];
 
 export default function GamesPage() {

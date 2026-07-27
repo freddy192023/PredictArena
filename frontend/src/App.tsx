@@ -9,6 +9,7 @@ import CrashPage from './pages/CrashPage';
 import GamesPage from './pages/GamesPage';
 import RoulettePage from './pages/RoulettePage';
 import HiLoPage from './pages/HiLoPage';
+import SnakePage from './pages/SnakePage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
@@ -99,6 +100,15 @@ export default function App() {
           element={
             <ProtectedRoute>
               <HiLoPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/games/snake"
+          element={
+            <ProtectedRoute>
+              <SnakePage />
             </ProtectedRoute>
           }
         />
