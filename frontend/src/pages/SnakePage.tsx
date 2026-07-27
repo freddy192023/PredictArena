@@ -97,7 +97,7 @@ export default function SnakePage() {
     }
 
     // Cobrar entrada
-    await updateCoins(-ENTRY_FEE);
+    updateCoins(user.arenaCoins - ENTRY_FEE);
     
     setSnake(INITIAL_SNAKE);
     setDirection(INITIAL_DIRECTION);
@@ -115,8 +115,8 @@ export default function SnakePage() {
   const endGame = async () => {
     setStatus('GAME_OVER');
     // Pagar ganancias
-    if (coinsEarnedRef.current > 0) {
-      await updateCoins(coinsEarnedRef.current);
+    if (coinsEarnedRef.current > 0 && user) {
+      updateCoins(user.arenaCoins + coinsEarnedRef.current);
     }
   };
 
